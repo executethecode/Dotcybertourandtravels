@@ -203,6 +203,16 @@ const openWhatsApp = (message = "") => {
   }, 1200);
 };
 
+const openExternalLink = (url) => {
+  const link = document.createElement("a");
+  link.href = url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 function App() {
   return (
     <HashRouter>
@@ -613,7 +623,7 @@ function HomePage() {
             <button
               className="rounded-full bg-slate-100 px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-200"
               onClick={() =>
-                window.open("https://www.akbartravels.com/in/flight", "_blank")
+                openExternalLink("https://www.akbartravels.com/in/flight")
               }
             >
               BOOK FLIGHT
@@ -621,7 +631,7 @@ function HomePage() {
             <button
               className="rounded-full bg-gradient-to-r from-sky-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
               onClick={() =>
-                window.open("https://indianvisaonline.gov.in/", "_blank")
+                openExternalLink("https://indianvisaonline.gov.in/")
               }
             >
               APPLY VISA
