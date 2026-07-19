@@ -2,7 +2,7 @@ import { useState } from "react";
 import { HashRouter, NavLink, Navigate, Route, Routes } from "react-router-dom";
 
 const navItems = [
-  { to: "/", label: "HOME" },
+  { to: "/", label: "HOME", end: true },
   { to: "/about-us", label: "ABOUT US" },
   { to: "/services", label: "SERVICES" },
   { to: "/visa-services", label: "VISA SERVICES" },
@@ -26,16 +26,115 @@ const packages = [
 ];
 
 const services = [
-  "Aadhaar Services",
-  "PAN Card",
-  "Passport",
-  "Ayushman Card",
-  "Ration Card",
-  "Driving License",
-  "Voter ID",
-  "Pension KYC",
-  "Scholarship Forms",
-  "Print & Scan",
+  {
+    title: "Travel & Tour Services",
+    items: [
+      "Domestic Flight",
+      "International Flight",
+      "Group Flight Booking",
+      "Flight Reschedule & Cancellation",
+      "Train Ticket",
+      "Bus Ticket Booking",
+      "Hotel Booking",
+      "Holiday Tour Packages",
+      "Honeymoon Packages",
+      "Umrah Packages",
+      "Hajj Services",
+    ],
+  },
+  {
+    title: "Visa Assistance",
+    items: [
+      "Tourist Visa",
+      "Business Visa",
+      "Saudi / Kuwait Visa Stamping",
+      "Travel Insurance",
+      "Dummy / Onward Ticket",
+      "Forex Exchange (USD, AED, SAR, QAR)",
+    ],
+  },
+  {
+    title: "Cyber Cafe Services",
+    items: [
+      "All Online Government Forms",
+      "All Private Online Forms",
+      "Passport Application",
+      "Scholarship Forms",
+    ],
+  },
+  {
+    title: "PAN Services",
+    items: [
+      "New PAN Card",
+      "PAN Correction",
+      "e-PAN Download",
+      "PAN-Aadhaar Linking",
+    ],
+  },
+  {
+    title: "Government & ID Services",
+    items: [
+      "Ayushman Bharat Card",
+      "Ration Card Services",
+      "Voter ID Services",
+      "Driving Licence",
+      "Birth Certificate",
+      "Death Certificate",
+      "Income Certificate",
+      "Caste Certificate",
+      "Residential Certificate",
+      "EWS Certificate",
+      "Character Certificate",
+      "e-Shram Card",
+      "PM Kisan Registration",
+      "Pension KYC",
+      "Disability Certificate Assistance",
+    ],
+  },
+  {
+    title: "Banking & Financial Services",
+    items: [
+      "AEPS Cash Withdrawal",
+      "Money Transfer",
+      "Balance Enquiry",
+      "Mini Statement",
+      "Aadhaar Seeding (NPCI)",
+      "Fastag Services",
+    ],
+  },
+  {
+    title: "Education Services",
+    items: [
+      "Scholarship Registration",
+      "School Admission",
+      "College Admission",
+      "University Admission",
+      "Competitive Exam Forms",
+      "Entrance Exam Registration",
+      "Online Counselling",
+    ],
+  },
+  {
+    title: "Business Services",
+    items: [
+      "GST Registration",
+      "MSME Registration",
+      "Shop Registration",
+      "Digital Signature (DSC)",
+      "Company Documentation",
+      "UDYAM Registration",
+    ],
+  },
+  {
+    title: "Other Services",
+    items: [
+      "Passport Assistance",
+      "Police Verification Assistance",
+      "Affidavit Drafting",
+      "Notary Assistance",
+      "Courier Booking",
+    ],
+  },
 ];
 
 const offers = [
@@ -215,7 +314,11 @@ function AppContent() {
                 <NavLink
                   key={item.to}
                   to={item.to}
-                  onClick={() => setIsMenuOpen(false)}
+                  end={item.end}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
                   className={({ isActive }) =>
                     `rounded-full px-3 py-2 text-center text-sm font-semibold transition ${isActive ? "bg-amber-100 text-amber-700" : "text-slate-700 hover:bg-slate-100 hover:text-amber-600"}`
                   }
@@ -629,16 +732,26 @@ function HomePage() {
 
       <section className="space-y-8">
         <SectionHeading
-          eyebrow="Our Digital & Cyber Services"
-          title="All online services under one roof"
+          eyebrow="Our Services"
+          title="Everything you need for travel, paperwork, and digital support"
         />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-6 lg:grid-cols-2">
           {services.map((service) => (
             <div
-              key={service}
-              className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6 text-center text-sm font-semibold text-slate-800"
+              key={service.title}
+              className="rounded-[2rem] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-7 shadow-sm"
             >
-              {service}
+              <h3 className="text-lg font-semibold text-slate-900">
+                {service.title}
+              </h3>
+              <ul className="mt-4 space-y-2 text-sm leading-7 text-slate-600">
+                {service.items.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-amber-500" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -698,44 +811,23 @@ function ServicesPage() {
         title="End-to-end travel and digital support for every need"
         description="We help you plan, process, and travel with confidence from flight reservations to document support."
       />
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {[
-          {
-            title: "Flight Booking",
-            detail: "Airfare assistance for domestic and international routes.",
-          },
-          {
-            title: "Visa Assistance",
-            detail:
-              "Document guidance, application support, and real-time updates.",
-          },
-          {
-            title: "Umrah & Hajj packages",
-            detail: "Comfortable and well-managed pilgrimage travel plans.",
-          },
-          {
-            title: "Digital Services",
-            detail: "Aadhaar, PAN, passport, and public service support.",
-          },
-          {
-            title: "Hotel & Transport",
-            detail: "Trusted stay and transfer arrangements for every trip.",
-          },
-          {
-            title: "Customer Support",
-            detail: "Round-the-clock assistance before and during travel.",
-          },
-        ].map((service) => (
+      <div className="grid gap-6 lg:grid-cols-2">
+        {services.map((service) => (
           <div
             key={service.title}
-            className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm"
+            className="rounded-[2rem] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-7 shadow-sm"
           >
-            <h3 className="font-display text-2xl font-semibold text-slate-900">
+            <h3 className="text-lg font-semibold text-slate-900">
               {service.title}
             </h3>
-            <p className="mt-4 text-base leading-8 text-slate-600">
-              {service.detail}
-            </p>
+            <ul className="mt-4 space-y-2 text-sm leading-7 text-slate-600">
+              {service.items.map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-amber-500" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
