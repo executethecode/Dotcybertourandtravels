@@ -91,6 +91,19 @@ const blogPosts = [
   },
 ];
 
+const businessPhone = "917250323786";
+
+const openWhatsApp = (message = "") => {
+  const whatsappAppUrl = `whatsapp://send?phone=${businessPhone}${message ? `&text=${encodeURIComponent(message)}` : ""}`;
+  const whatsappWebUrl = `https://wa.me/${businessPhone}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
+
+  window.location.href = whatsappAppUrl;
+
+  window.setTimeout(() => {
+    window.open(whatsappWebUrl, "_blank", "noopener,noreferrer");
+  }, 1200);
+};
+
 function App() {
   return (
     <HashRouter>
@@ -109,7 +122,6 @@ function AppContent() {
   });
   const [errors, setErrors] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const businessPhone = "+91 7250323786";
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -155,8 +167,7 @@ function AppContent() {
       .filter(Boolean)
       .join("\n");
 
-    const whatsappUrl = `https://wa.me/${businessPhone}?text=${encodeURIComponent(messageBody)}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    openWhatsApp(messageBody);
 
     setFormData({ name: "", email: "", number: "", message: "" });
     setErrors({});
@@ -514,13 +525,7 @@ function HomePage() {
             </button>
             <button
               className="rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
-              onClick={() =>
-                window.open(
-                  "https://wa.me/917250323786",
-                  "_blank",
-                  "noopener,noreferrer",
-                )
-              }
+              onClick={() => openWhatsApp()}
             >
               WHATSAPP NOW
             </button>
