@@ -62,7 +62,7 @@ const galleryItems = [
   {
     title: "Makkah Journey",
     image:
-      "https://images.unsplash.com/photo-1578305034054-6b0ef96f7b3b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=900&q=80",
   },
   {
     title: "Bahrain Escape",
